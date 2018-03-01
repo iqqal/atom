@@ -662,11 +662,31 @@ describe('WorkspaceElement', () => {
       moveMouse({clientX: 300, clientY: 290})
       expectToggleButtonHidden(leftDock)
       moveMouse({clientX: 300, clientY: 299})
+      let msg = []
+      msg.push('-------> mouse is at 300, 299.')
+      msg.push('leftDock, pointWithinHoverArea detectingExit true  ' + leftDock.pointWithinHoverArea({x: 300, y: 299}, true))
+      msg.push('leftDock, pointWithinHoverArea detectingExit false ' + leftDock.pointWithinHoverArea({x: 300, y: 299}, false))
+      msg.push('rightDock, pointWithinHoverArea detectingExit true  ' + rightDock.pointWithinHoverArea({x: 300, y: 299}, true))
+      msg.push('rightDock, pointWithinHoverArea detectingExit false ' + rightDock.pointWithinHoverArea({x: 300, y: 299}, false))
+      msg.push('bottomDock, pointWithinHoverArea detectingExit true  ' + bottomDock.pointWithinHoverArea({x: 300, y: 299}, true))
+      msg.push('bottomDock, pointWithinHoverArea detectingExit false ' + bottomDock.pointWithinHoverArea({x: 300, y: 299}, false))
+      msg.push('does toggle button class: ' + bottomDock.toggleButton.element.className)
+      expect(msg.join('\n')).toBe('')
       expectToggleButtonVisible(bottomDock, 'icon-chevron-up')
 
       // Click the toggle button again
       bottomDock.toggleButton.innerElement.click()
       expect(bottomDock.isVisible()).toBe(true)
+      msg = []
+      msg.push('-------> after click.')
+      msg.push('leftDock, pointWithinHoverArea detectingExit true  ' + leftDock.pointWithinHoverArea({x: 300, y: 299}, true))
+      msg.push('leftDock, pointWithinHoverArea detectingExit false ' + leftDock.pointWithinHoverArea({x: 300, y: 299}, false))
+      msg.push('rightDock, pointWithinHoverArea detectingExit true  ' + rightDock.pointWithinHoverArea({x: 300, y: 299}, true))
+      msg.push('rightDock, pointWithinHoverArea detectingExit false ' + rightDock.pointWithinHoverArea({x: 300, y: 299}, false))
+      msg.push('bottomDock, pointWithinHoverArea detectingExit true  ' + bottomDock.pointWithinHoverArea({x: 300, y: 299}, true))
+      msg.push('bottomDock, pointWithinHoverArea detectingExit false ' + bottomDock.pointWithinHoverArea({x: 300, y: 299}, false))
+      msg.push('does toggle button class: ' + bottomDock.toggleButton.element.className)
+      expect(msg.join('\n')).toBe('')
       expectToggleButtonVisible(bottomDock, 'icon-chevron-down')
     })
 
